@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>어흥 회장의 비밀 🐯</title>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #FFB347;
+  --dark-orange: #E89030;
+  --deep: #3D2B1F;
+  --cream: #FFF5F0;
+  --card-bg: #FFFAF8;
+  --border: #C4967A;
+  --red: #E07070;
+  --green: #7DBF8A;
+  --blue: #7AAAD4;
+  --shadow: 4px 4px 0px #C4967A;
+  --shadow-sm: 3px 3px 0px #C4967A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; }
+body {
+  font-family: 'Nanum Gothic', sans-serif;
+  background: #F9EDE6;
+  min-height: 100vh;
+  color: var(--deep);
+}
+
+/* ===== SCREENS ===== */
+.screen { display: none; min-height: 100vh; padding: 0; }
+.screen.active { display: flex; flex-direction: column; align-items: center; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.fadeIn { animation: fadeIn 0.45s ease forwards; }
+
+/* ===== INTRO ===== */
+#s-intro {
+  background: radial-gradient(ellipse at 50% 30%, #FFD9C2 0%, #F9EDE6 65%);
+  justify-content: center;
+  gap: 18px;
+  padding: 32px 20px 40px;
+  text-align: center;
+}
+.tiger-big { font-size: 80px; animation: tigerbounce 2.2s ease-in-out infinite; display: block; filter: drop-shadow(0 6px 12px rgba(245,166,35,0.5)); }
+@keyframes tigerbounce { 0%,100%{transform:translateY(0) rotate(-3deg);} 50%{transform:translateY(-12px) rotate(3deg);} }
+.badge-pill { background: var(--orange); color: var(--deep); font-size: 11px; font-weight: 900; padding: 5px 16px; border-radius: 30px; border: 2px solid var(--border); letter-spacing: 2px; display: inline-block; }
+.intro-title-box {
+  background: #fff;
+  border: 3px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 5px 5px 0px #C4967A;
+  padding: 22px 32px 18px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+.intro-title-label {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--dark-orange);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.intro-title {
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: clamp(22px, 6vw, 34px);
+  font-weight: 400;
+  color: #3D2B1F;
+  line-height: 1.2;
+  letter-spacing: 0px;
+  white-space: nowrap;
+}
+.intro-title span {
+  display: inline-block;
+  background: var(--orange);
+  border-radius: 8px;
+  padding: 0 6px;
+  margin-bottom: 2px;
+}
+.intro-title-sub {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 12px;
+  color: rgba(61,43,31,0.55);
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+.intro-sub { font-size: 13px; color: rgba(61,43,31,0.7); line-height: 1.75; max-width: 320px; }
+.story-box { background: var(--card-bg); border: 3px solid var(--border); border-radius: 22px; padding: 18px 20px; max-width: 380px; width: 100%; box-shadow: var(--shadow); text-align: left; }
+.story-box .lbl { font-size: 10px; font-weight: 900; letter-spacing: 2px; color: var(--dark-orange); margin-bottom: 8px; text-transform: uppercase; }
+.story-box p { font-size: 13px; line-height: 1.85; }
+.howto { background: rgba(255,179,71,0.15); border: 2px solid rgba(255,179,71,0.5); border-radius: 22px; padding: 14px 18px; max-width: 380px; width: 100%; text-align: left; }
+.howto h3 { font-size: 12px; font-weight: 900; color: #C47A30; letter-spacing: 1px; margin-bottom: 10px; }
+.howto ol { padding-left: 16px; }
+.howto li { font-size: 12px; color: rgba(61,43,31,0.85); line-height: 1.7; margin-bottom: 4px; }
+.howto li span { color: #C47A30; font-weight: 700; }
+
+/* ===== STAGE HEADER ===== */
+.stage-header {
+  width: 100%; max-width: 500px;
+  background: var(--orange);
+  border-bottom: 3px solid var(--border);
+  padding: 12px 16px 10px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.stage-tag { font-size: 11px; font-weight: 900; letter-spacing: 1px; color: var(--deep); opacity: 0.7; }
+.stage-title { font-family: 'Nanum Gothic', sans-serif; font-size: 18px; font-weight: 800; color: var(--deep); }
+.stage-icon { font-size: 24px; }
+
+/* ===== CONTENT AREA ===== */
+.content-area { width: 100%; max-width: 500px; padding: 16px 14px 80px; flex: 1; }
+
+/* ===== CARD STYLES ===== */
+.clue-card {
+  background: var(--card-bg);
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.clue-card:active { transform: scale(0.985); box-shadow: 2px 2px 0 var(--border); }
+.card-header {
+  background: var(--orange);
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.card-num {
+  background: var(--deep);
+  color: var(--orange);
+  font-size: 11px; font-weight: 900;
+  padding: 3px 8px; border-radius: 20px;
+  letter-spacing: 0.5px; white-space: nowrap;
+}
+.card-title { font-size: 14px; font-weight: 700; color: var(--deep); flex: 1; }
+.card-arrow { font-size: 16px; color: var(--deep); transition: transform 0.25s; }
+.card-arrow.open { transform: rotate(180deg); }
+.card-body { padding: 14px 16px; display: none; }
+.card-body.open { display: block; animation: fadeIn 0.25s ease; }
+.card-date { font-size: 11px; color: var(--dark-orange); font-weight: 700; margin-bottom: 8px; }
+.card-text { font-size: 13px; line-height: 1.85; }
+.card-text strong { color: var(--red); }
+.card-text .q { color: var(--blue); font-weight: 700; }
+.card-text .a { color: #444; }
+
+/* Stage 2 cards - blue accent */
+.card-stage2 .card-header { background: #A8C8E8; }
+.card-stage2 .card-num { background: #5A8BB8; color: #fff; }
+.card-stage2 .card-title { color: #3D2B1F; }
+.card-stage2 .card-arrow { color: #3D2B1F; }
+
+/* ===== STEP INTRO BANNERS ===== */
+.step-banner {
+  background: var(--card-bg);
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.step-banner .emoji { font-size: 36px; margin-bottom: 8px; display: block; }
+.step-banner h2 { font-family: 'Nanum Gothic', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+.step-banner p { font-size: 12px; line-height: 1.7; color: #555; }
+
+/* ===== INFERENCE CARD ===== */
+.inference-card {
+  background: var(--card-bg);
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+.inference-card h3 { font-family: 'Nanum Gothic', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 14px; color: var(--deep); border-bottom: 2px solid var(--orange); padding-bottom: 8px; }
+.fill-group { margin-bottom: 16px; }
+.fill-label { font-size: 12px; font-weight: 700; color: var(--dark-orange); margin-bottom: 6px; letter-spacing: 0.5px; }
+.fill-line { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.fill-line span { font-size: 13px; white-space: nowrap; font-weight: 700; }
+input[type="text"], textarea {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: 'Nanum Gothic', sans-serif;
+  background: #fff;
+  color: var(--deep);
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type="text"]:focus, textarea:focus { border-color: var(--orange); }
+textarea { min-height: 80px; resize: vertical; line-height: 1.7; }
+.group-name-input { width: 140px; }
+
+/* ===== FACTCHECK CARD ===== */
+.factcheck-card {
+  background: var(--card-bg);
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+.factcheck-card h3 { font-size: 14px; font-weight: 900; color: var(--deep); margin-bottom: 12px; background: var(--orange); margin: -16px -16px 14px; padding: 10px 14px; border-radius: 11px 11px 0 0; }
+.fc-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(44,21,0,0.1);
+}
+.fc-item:last-child { border-bottom: none; }
+.fc-num { background: var(--orange); color: var(--deep); font-size: 12px; font-weight: 900; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--border); }
+.fc-text { font-size: 13px; line-height: 1.7; flex: 1; }
+
+/* ===== TRUTH CARD ===== */
+.truth-card {
+  background: #EBF7ED;
+  border: 3px solid #A8D5B0;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+  color: #2A4A2E;
+}
+.truth-card .truth-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.truth-card .truth-icon { font-size: 32px; }
+.truth-card h3 { font-family: 'Nanum Gothic', sans-serif; font-size: 20px; font-weight: 800; color: #3A8A4A; }
+.truth-card p { font-size: 13px; line-height: 1.9; margin-bottom: 10px; color: rgba(42,74,46,0.88); }
+.truth-card .verdict { background: rgba(255,179,71,0.2); border: 2px solid var(--orange); border-radius: 10px; padding: 12px 14px; margin: 12px 0; text-align: center; }
+.truth-card .verdict strong { font-size: 16px; color: #C47A30; }
+
+/* ===== REFLECTION ===== */
+.reflection-area { background: var(--card-bg); border: 3px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
+.reflection-area h3 { font-size: 14px; font-weight: 900; margin-bottom: 12px; color: var(--deep); }
+.reftext { width: 100%; min-height: 100px; }
+
+/* ===== BOTTOM NAV BUTTON ===== */
+.nav-bar {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 500px;
+  padding: 12px 16px 20px;
+  background: linear-gradient(to top, rgba(249,237,230,1) 60%, rgba(249,237,230,0));
+  display: flex; gap: 10px;
+  z-index: 200;
+}
+.btn-main {
+  flex: 1;
+  background: var(--orange);
+  color: var(--deep);
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 10px;
+  font-size: 15px;
+  font-weight: 900;
+  font-family: 'Nanum Gothic', sans-serif;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+  letter-spacing: 0.5px;
+}
+.btn-main:active { transform: translateY(2px); box-shadow: 1px 1px 0 var(--border); }
+.btn-sub {
+  background: rgba(61,43,31,0.08);
+  color: #3D2B1F;
+  border: 2px solid rgba(61,43,31,0.2);
+  border-radius: 12px;
+  padding: 14px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Nanum Gothic', sans-serif;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.btn-sub:active { transform: translateY(2px); }
+.btn-print {
+  background: #7AAAD4;
+  color: #fff;
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 10px;
+  font-size: 14px;
+  font-weight: 900;
+  font-family: 'Nanum Gothic', sans-serif;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.btn-print:active { transform: translateY(2px); box-shadow: 1px 1px 0 var(--border); }
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap { width: 100%; max-width: 500px; padding: 8px 14px 0; }
+.progress-bar-bg { background: rgba(61,43,31,0.12); border-radius: 6px; height: 6px; overflow: hidden; }
+.progress-bar-fill { background: var(--orange); height: 100%; border-radius: 6px; transition: width 0.5s ease; }
+.progress-label { font-size: 11px; color: rgba(61,43,31,0.5); text-align: right; margin-top: 4px; }
+
+/* ===== DISCUSSION TIMER ===== */
+.timer-box {
+  background: var(--card-bg);
+  border: 3px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+.timer-box h4 { font-size: 12px; font-weight: 700; color: var(--dark-orange); margin-bottom: 8px; letter-spacing: 1px; }
+.timer-display { font-family: 'Nanum Gothic', sans-serif; font-size: 40px; font-weight: 800; color: var(--deep); letter-spacing: 2px; margin-bottom: 10px; }
+.timer-display.warn { color: var(--red); animation: pulse 0.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+.timer-btns { display: flex; gap: 8px; justify-content: center; }
+.tbtn { background: var(--orange); border: 2px solid var(--border); border-radius: 8px; padding: 7px 16px; font-size: 13px; font-weight: 700; font-family: 'Nanum Gothic', sans-serif; cursor: pointer; }
+.tbtn.red { background: #E03030; color: #fff; }
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  body { background: white !important; }
+  .screen { display: none !important; }
+  #print-area { display: block !important; }
+  .no-print { display: none !important; }
+}
+#print-area {
+  display: none;
+  font-family: 'Nanum Gothic', sans-serif;
+  padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #000;
+}
+.print-card-outer {
+  border: 3px solid #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  page-break-inside: avoid;
+}
+.print-card-header {
+  background: #F5A623;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: 900;
+  border-bottom: 2px solid #000;
+}
+.print-card-body { padding: 16px; }
+.print-field { margin-bottom: 14px; }
+.print-field-label { font-size: 12px; font-weight: 900; letter-spacing: 1px; margin-bottom: 6px; color: #C47D0A; }
+.print-line { border-bottom: 2px solid #333; min-height: 32px; margin-bottom: 6px; padding-bottom: 4px; font-size: 14px; line-height: 1.6; }
+.print-long-line { border-bottom: 2px solid #333; min-height: 56px; padding-bottom: 4px; font-size: 14px; line-height: 1.6; margin-bottom: 6px; }
+.print-title { font-family: 'Nanum Gothic', sans-serif; font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 4px; }
+.print-sub { font-size: 12px; text-align: center; color: #666; margin-bottom: 16px; }
+.print-stars { text-align: center; font-size: 24px; letter-spacing: 4px; margin-bottom: 6px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 360px) {
+  .intro-title { font-size: 24px; }
+  .card-title { font-size: 13px; }
+  .btn-main { font-size: 14px; padding: 12px 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== INTRO SCREEN ===== -->
+<div class="screen active" id="s-intro">
+  <span class="tiger-big">🐯</span>
+  <div class="intro-title-box fadeIn">
+    <div class="intro-title-label">🐯 팩트체크 게임</div>
+    <div class="intro-title">어흥 회장의 비밀</div>
+    <div class="intro-title-sub">소문과 진실 사이, 단서를 모아<br>진짜 범인을 찾아라!</div>
+  </div>
+
+  <div class="story-box fadeIn">
+    <div class="lbl">📜 사건 배경</div>
+    <p>팥죽할멈이 세상을 떠났다. 할멈은 호랑이(어흥)와 함께 <strong>'레드빈 푸드'</strong>라는 식품 회사를 차려 팥으로 만든 건강한 음식을 세계에 알렸다.<br><br>그러나 할멈이 세상을 떠난 뒤 바람을 만난 불씨처럼 소문이 퍼지기 시작하는데...</p>
+  </div>
+
+  <div class="howto fadeIn">
+    <h3>🎮 게임 진행 방법</h3>
+    <ol>
+      <li><span>1단계</span> 단서 카드 1~6번 읽기</li>
+      <li><span>2단계</span> 단서 카드 7~9번 추가 확인</li>
+      <li><span>3단계</span> 토의 후 추론 카드 작성 & 인쇄</li>
+      <li><span>4단계</span> 팩트체크 기준 & 진실의 카드 확인</li>
+      <li><span>5단계</span> 소감 발표</li>
+    </ol>
+  </div>
+
+  <div class="nav-bar no-print" style="position:static;transform:none;background:transparent;padding:0;max-width:380px;width:100%;margin-top:8px;">
+    <button class="btn-main" onclick="goTo('s-stage1')">🚀 게임 시작하기</button>
+  </div>
+</div>
+
+<!-- ===== STAGE 1 ===== -->
+<div class="screen" id="s-stage1">
+  <div class="stage-header">
+    <div>
+      <div class="stage-tag">STAGE 1</div>
+      <div class="stage-title">단서 카드 1~6번</div>
+    </div>
+    <div class="stage-icon">🔎</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:20%"></div></div>
+    <div class="progress-label">1 / 5 단계</div>
+  </div>
+
+  <div class="content-area">
+    <div class="step-banner fadeIn">
+      <span class="emoji">📋</span>
+      <h2>단서 카드를 읽어보세요</h2>
+      <p>카드를 눌러 내용을 확인하세요.<br>모두 읽은 후 다음 단계로 이동하세요.</p>
+    </div>
+
+    <!-- Card 1 -->
+    <div class="clue-card fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 1</span>
+        <span class="card-title">동물 마을 인터넷 게시판</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 7일</div>
+        <div class="card-text">
+          바람을 만난 불씨처럼 소문이 퍼지기 시작하였고 인터넷 게시판에 <strong>'누군가 할멈을 해친 게 분명하다.'</strong>는 글이 올라오다.<br><br>
+          1. 할멈이 죽기에는 너무 젊어<br>
+          2. 매일 공원을 산책할 정도로 건강했대.<br>
+          3. 산 하나를 거뜬히 넘어 다닐 정도로 힘이 장사였대.
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="clue-card fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 2</span>
+        <span class="card-title">비밀 뉴스의 영상 1 – 알밤 TV</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 8일</div>
+        <div class="card-text">
+          <strong>제목:</strong> 호랑이, 상상을 초월하는 폭력의 세계<br><br>
+          커다란 호랑이가 화면을 뚫고 나올 것처럼 포효했고, 사납게 달려들어 짐승을 잡아먹는 장면이 반복해서 나옴.
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="clue-card fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 3</span>
+        <span class="card-title">비밀 뉴스의 영상 2 – 알밤 TV</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 9일</div>
+        <div class="card-text">
+          <strong>제목:</strong> 어흥 회장이 팥죽할멈을 잡아먹은 결정적 증거<br><br>
+          - 팥죽할멈이 사망한 새벽, 할멈의 집 앞 CCTV에 찍힌 영상으로 <strong>어흥 회장의 앞발에 붉은 피가 묻어 있다.</strong><br><br>
+          - 그날 밤 어흥 회장이 할멈의 집에서 <strong>수상한 가방</strong>을 끌고 나온다. 가방이 무척 크고 무거워 보인다. 가방 안에 대체 무엇이 있을까?
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="clue-card fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 4</span>
+        <span class="card-title">닥터 이글의 분석 보고서</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 15일</div>
+        <div class="card-text">
+          인터넷에 퍼지고 있는 영상을 분석해 봄.<br><br>
+          <strong>[어흥 발에 묻은 피 검사 결과]</strong><br>
+          어흥 회장의 발을 확대하자 피가 묻은 부분만 만화처럼 두드러져 이상해 보임. 유독 피 색깔만 선명해 보이는데 <strong>그건 색을 따로 입힌 것임.</strong><br><br>
+          <strong>[어흥이 한밤중에 큰 가방을 끌고 나오는 장면]</strong><br>
+          이 영상은 밤이 아니라 낮에 찍힌 것으로 <strong>필터를 써서 밤처럼 보이게 한 것임.</strong> 가방만 확대하여 큰 가방으로 보이게 함.<br><br>
+          <strong>결론:</strong> 아주 조잡한 방법으로 짜깁기한 영상. 전문가가 아니어도 충분히 할 수 있는 것임.
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="clue-card fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 5</span>
+        <span class="card-title">알밤과 북실 기자와의 인터뷰</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 10일</div>
+        <div class="card-text">
+          <span class="q">기자:</span> <span class="a">"알밤 TV에서 말한 두 가지 증거는 모두 CCTV에 찍힌 거였죠?"</span><br><br>
+          <span class="q">알밤:</span> <span class="a">"증거는...얼마든지 있어요. 일단 결정적인 거 두 개만 보여준 거예요. 그것만 봐도 딱 알겠잖아요. 어흥이가 할멈 재산을 빼돌린 다음에 잡아먹으려고 그동안 치밀하게 계획했다는 걸."</span><br><br>
+          <span class="q">기자:</span> <span class="a">"그런데 CCTV영상이 너무 흐려요. 밤인 데다 거리도 멀고, 정면으로 찍힌 것도 아니에요. 알밤님은 정확하게 보이시나요?"</span><br><br>
+          그러자 알밤의 목소리가 떨려 왔다.<br>
+          <span class="q">알밤:</span> <strong>"진실은...보려고 하는 자에게만 보이는 법이에요."</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="clue-card fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 6</span>
+        <span class="card-title">북실 기자의 취재 수첩 1</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 16일</div>
+        <div class="card-text">
+          나와 만나기로 한 어흥 회장이 <strong>'며칠 어디 다녀올 테니 찾지 말게'</strong> 라는 메모를 남기고 갑자기 사라졌다는 연락을 받고 어흥 회장을 찾아 그의 집에 갔다.<br><br>
+          어흥 회장 집에 가보니 갈색의 냄새나는 <strong>물찌똥이 바닥에 있었고</strong> 방문 바로 앞에는 움푹 파인 자국이 있었다. 묵직한 <strong>돌절구 같은 것이 위에서 쿵 떨어진</strong> 것처럼.<br><br>
+          그리고 집 앞 편의점 앞쪽에 있는 CCTV를 확인해보니 지난밤 가게 앞에서 찍힌 영상에는 <strong>지게와 멍석</strong>이 보였다.
+        </div>
+      </div>
+    </div>
+
+    <div style="height:10px"></div>
+  </div>
+
+  <div class="nav-bar no-print">
+    <button class="btn-sub" onclick="goTo('s-intro')">← 처음으로</button>
+    <button class="btn-main" onclick="goTo('s-stage2')">2단계로 이동 →</button>
+  </div>
+</div>
+
+<!-- ===== STAGE 2 ===== -->
+<div class="screen" id="s-stage2">
+  <div class="stage-header" style="background:#A8C8E8;">
+    <div>
+      <div class="stage-tag" style="color:rgba(61,43,31,0.6)">STAGE 2</div>
+      <div class="stage-title" style="color:#3D2B1F">단서 카드 7~9번</div>
+    </div>
+    <div class="stage-icon">🕵️</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:40%"></div></div>
+    <div class="progress-label">2 / 5 단계</div>
+  </div>
+
+  <div class="content-area">
+    <div class="step-banner fadeIn">
+      <span class="emoji">🔐</span>
+      <h2>추가 단서 공개!</h2>
+      <p>더 깊은 진실이 담긴 단서 카드입니다.<br>꼼꼼히 읽고 범인을 추론해보세요.</p>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="clue-card card-stage2 fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 7</span>
+        <span class="card-title">알밤의 전화 통화</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 17일</div>
+        <div class="card-text">
+          신문사 사무실로 들어가려던 북실이를 뒤에서 돗자리처럼 넓적한 것이 덮쳐 돌돌 말린 채로 북실이는 지게에 실려 어디론가 가게 되고...<br><br>
+          같은 시각 알밤은 휴대 전화에 대고 버럭 소리를 질렀다.<br>
+          <strong>"북실이를 놓쳐? 그게 무슨 소리야! 분명히 건물로 들어가는 거 확인했다면서. 당장 전화 끊어!"</strong><br><br>
+          알밤은 <strong>송곳과 물찌똥과 통화하던 전화기</strong>를 세차게 끊어버렸다.
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="clue-card card-stage2 fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 8</span>
+        <span class="card-title">북실 기자의 취재 수첩 2 – 어흥과의 인터뷰</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 18일</div>
+        <div class="card-text">
+          지게와 멍석과 함께 나를 팥죽 할멈의 집으로 데리고 온 어흥은 그동안의 일을 털어놓았다.<br><br>
+          어흥은 늘 팥죽할멈에게 감사하며 생활하였고 팥죽할멈이 세상을 떠난 날도 팥죽을 끓여 할멈 방에 들어간 어흥은 <strong>움직이지 않는 할멈을 보고 깜짝 놀라 그릇을 떨어뜨렸다고 한다.</strong><br><br>
+          팥죽이 쏟아지며 앞발에 묻었지만 급한 마음에 닦지 못한 채로 서둘러 마을로 달려가 도움을 요청하였다. 병원에 옮겨진 할멈은 일어나지 못했고 <strong>어흥은 장례식을 준비하기 위해 집에 들러 이것저것 챙겨 가방을 들고 나왔다고 한다.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="clue-card card-stage2 fadeIn">
+      <div class="card-header" onclick="toggleCard(this)">
+        <span class="card-num">단서 9</span>
+        <span class="card-title">알밤의 전화 통화 (배경 이야기)</span>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="card-date">📅 20XX년 7월 19일</div>
+        <div class="card-text">
+          팥죽할멈에게로 와서 열심히 일하는 어흥을 알밤을 포함한 식구들은 곱지 않게 보았다. 어흥을 괴롭히다가 결국 팥죽할멈 집에서 나가버렸고 어흥은 레드빈푸드라는 회사를 차리게 되었다.<br><br>
+          한동안 연락도 없던 집 나간 식구들은 찾아와 <strong>행패를 부리기도 했고 할멈이 돌아가시자 어흥을 괴롭히고 나쁜 소문을 퍼뜨린 것이다.</strong><br><br>
+          어흥을 계속 괴롭히는 것을 보고 지게와 멍석은 마음이 편치 않아 물찌똥과 돌절구와 송곳에게 그만 좀 하라고 말하려고 어흥 집 근처에 갔었다고 한다.<br><br>
+          <strong>물찌똥과 돌절구와 송곳은 어흥 회장을 협박하고 어흥의 집에 무단 침입한 죄로 경찰에 붙잡혀 갔지만 어흥이 처벌을 원하지 않았기에 반성문을 쓰고 풀려났다.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:10px"></div>
+  </div>
+
+  <div class="nav-bar no-print">
+    <button class="btn-sub" onclick="goTo('s-stage1')">← 1단계</button>
+    <button class="btn-main" onclick="goTo('s-stage3')">3단계로 이동 →</button>
+  </div>
+</div>
+
+<!-- ===== STAGE 3 ===== -->
+<div class="screen" id="s-stage3">
+  <div class="stage-header" style="background:#C9A8E0;">
+    <div>
+      <div class="stage-tag" style="color:rgba(61,43,31,0.6)">STAGE 3</div>
+      <div class="stage-title" style="color:#3D2B1F">추론 카드 작성</div>
+    </div>
+    <div class="stage-icon">✍️</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:60%"></div></div>
+    <div class="progress-label">3 / 5 단계</div>
+  </div>
+
+  <div class="content-area">
+    <div class="step-banner fadeIn">
+      <span class="emoji">💬</span>
+      <h2>토의 후 추론하기</h2>
+      <p>팀원들과 충분히 토의한 후,<br>아래 추론 카드를 작성하고 인쇄하세요.</p>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer-box fadeIn">
+      <h4>⏱ 토의 타이머</h4>
+      <div class="timer-display" id="timer-display">10:00</div>
+      <div class="timer-btns">
+        <button class="tbtn" onclick="startTimer()">▶ 시작</button>
+        <button class="tbtn" onclick="pauseTimer()">⏸ 일시정지</button>
+        <button class="tbtn red" onclick="resetTimer()">↺ 초기화</button>
+      </div>
+    </div>
+
+    <!-- Inference Form -->
+    <div class="inference-card fadeIn">
+      <h3>🔍 추론 카드</h3>
+      
+      <div class="fill-group">
+        <div class="fill-label">모둠 이름</div>
+        <input type="text" id="group-name" placeholder="모둠 이름을 입력하세요" maxlength="20">
+      </div>
+
+      <div class="fill-group">
+        <div class="fill-label">우리 모둠이 추론한 범인</div>
+        <input type="text" id="culprit" placeholder="범인이라고 생각하는 인물을 적으세요" maxlength="30">
+      </div>
+
+      <div class="fill-group">
+        <div class="fill-label">범인이라고 생각하는 이유</div>
+        <textarea id="reason" placeholder="단서 카드를 바탕으로 이유를 자세히 적으세요..."></textarea>
+      </div>
+
+      <div class="fill-group">
+        <div class="fill-label">단서 카드에서 발견한 허점</div>
+        <textarea id="weakness" placeholder="잘못된 정보, 조작된 증거, 의심스러운 점을 적으세요..."></textarea>
+      </div>
+    </div>
+
+    <div style="height:10px"></div>
+  </div>
+
+  <div class="nav-bar no-print">
+    <button class="btn-sub" onclick="goTo('s-stage2')">← 2단계</button>
+    <button class="btn-print" onclick="printCard()">🖨 인쇄 / PDF 저장</button>
+    <button class="btn-main" onclick="goTo('s-stage4')">4단계 →</button>
+  </div>
+</div>
+
+<!-- ===== STAGE 4 ===== -->
+<div class="screen" id="s-stage4">
+  <div class="stage-header" style="background:#A8D5B0;">
+    <div>
+      <div class="stage-tag" style="color:rgba(61,43,31,0.6)">STAGE 4</div>
+      <div class="stage-title" style="color:#3D2B1F">팩트체크 & 진실 공개</div>
+    </div>
+    <div class="stage-icon">✅</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:80%"></div></div>
+    <div class="progress-label">4 / 5 단계</div>
+  </div>
+
+  <div class="content-area">
+    <div class="step-banner fadeIn">
+      <span class="emoji">⚖️</span>
+      <h2>팩트체크 기준 확인</h2>
+      <p>정보를 올바르게 판별하는 5가지 기준입니다.</p>
+    </div>
+
+    <!-- Fact Check Card -->
+    <div class="factcheck-card fadeIn">
+      <h3>📋 팩트체크 가이드라인 5가지</h3>
+      <div class="fc-item">
+        <div class="fc-num">1</div>
+        <div class="fc-text"><strong>정보의 출처를 확인합시다!</strong><br>누가 만든 정보인지, 어디서 온 정보인지 확인하세요.</div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-num">2</div>
+        <div class="fc-text"><strong>정보의 작성자를 확인합시다!</strong><br>기자 이름, 이메일 등 신원을 확인하세요.</div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-num">3</div>
+        <div class="fc-text"><strong>정보가 언제 만들어졌는지 확인합시다!</strong><br>날짜가 없거나 오래된 정보일 수 있어요.</div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-num">4</div>
+        <div class="fc-text"><strong>다른 정보를 추가적으로 확인합시다!</strong><br>한 가지 출처만 믿지 말고 여러 정보를 비교하세요.</div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-num">5</div>
+        <div class="fc-text"><strong>정보가 과도한 불안을 주는지 확인합시다!</strong><br>감정을 자극하거나 공포심을 주는 정보는 의심하세요.</div>
+      </div>
+    </div>
+
+    <!-- Truth reveal button -->
+    <div id="truth-reveal-btn" style="text-align:center; margin-bottom:14px;">
+      <button class="btn-main" style="position:static;max-width:300px;width:100%;border-radius:12px;padding:16px;font-size:16px;box-shadow:var(--shadow);" onclick="revealTruth()">
+        🔓 진실의 카드 공개하기
+      </button>
+    </div>
+
+    <!-- Truth Card (hidden initially) -->
+    <div class="truth-card fadeIn" id="truth-card" style="display:none;">
+      <div class="truth-header">
+        <div class="truth-icon">🌿</div>
+        <h3>진실의 카드</h3>
+      </div>
+
+      <div class="verdict">
+        <strong>🐯 어흥 회장은 범인이 아닙니다!</strong>
+      </div>
+
+      <p>팥죽할멈은 <strong style="color:#C47A30">오래 앓아 온 지병</strong>으로 인해 자연스럽게 세상을 떠났습니다. 누군가가 해친 것이 아니었어요.</p>
+
+      <p>어흥은 팥죽 할멈이 움직이지 않는 것을 보고 깜짝 놀라 <strong style="color:#C47A30">팥죽 그릇을 떨어뜨렸고</strong>, 팥죽이 쏟아지며 앞발에 묻었지만 급한 마음에 닦지 못한 채로 마을로 달려가 도움을 요청했습니다. 앞발의 붉은 것은 피가 아니라 <strong style="color:#C47A30">팥죽</strong>이었어요!</p>
+
+      <p>어흥이 들고 나온 가방은 장례식 준비를 위한 짐이었고, 지게와 멍석은 알밤 일당에게 그만두라고 말하러 갔다가 CCTV에 찍혔을 뿐이에요.</p>
+
+      <div class="verdict">
+        <strong style="color:#3A8A4A">✅ 팥죽할멈은 지병으로 인한 자연사였습니다!</strong>
+      </div>
+
+      <!-- 알밤의 잘못된 행동 팩트체크 -->
+      <div style="background:rgba(255,179,71,0.15); border:2px solid #E8A050; border-radius:10px; padding:14px; margin:14px 0;">
+        <div style="font-size:13px; font-weight:900; color:#C47A30; margin-bottom:10px;">⚠️ 알밤의 잘못된 행동 — 팩트체크로 살펴보기</div>
+
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid rgba(196,122,48,0.2);">
+          <div style="background:#FFB347;color:#3D2B1F;font-size:11px;font-weight:900;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:2px;">①</div>
+          <div style="font-size:12px; line-height:1.75; color:#3D2B1F;">
+            <strong style="color:#C47A30">출처를 속인 가짜 영상 제작</strong><br>
+            '알밤 TV'는 공식 정보처럼 보이게 만들었지만, 호랑이가 사나운 장면만 골라 짜깁기한 조작 영상이었어요. 출처를 꼭 확인해야 해요! (팩트체크 기준 ①②)
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid rgba(196,122,48,0.2);">
+          <div style="background:#FFB347;color:#3D2B1F;font-size:11px;font-weight:900;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:2px;">②</div>
+          <div style="font-size:12px; line-height:1.75; color:#3D2B1F;">
+            <strong style="color:#C47A30">사람들의 감정을 이용해 소문 퍼뜨리기</strong><br>
+            "진실은 보려고 하는 자에게만 보인다"는 말로 사람들이 불안해하고 어흥을 더욱 의심하도록 유도했어요. 무섭거나 불안한 느낌을 주는 정보는 한번 더 의심해야 해요! (팩트체크 기준 ⑤)
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid rgba(196,122,48,0.2);">
+          <div style="background:#FFB347;color:#3D2B1F;font-size:11px;font-weight:900;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:2px;">③</div>
+          <div style="font-size:12px; line-height:1.75; color:#3D2B1F;">
+            <strong style="color:#C47A30">오래된 사건을 최근 일처럼 속이기</strong><br>
+            어흥이 과거에 사냥하던 오래된 영상을 마치 최근에 생긴 일처럼 편집해서 올렸어요. 정보가 언제 만들어진 것인지 날짜를 꼭 확인해야 해요! (팩트체크 기준 ③)
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid rgba(196,122,48,0.2);">
+          <div style="background:#FFB347;color:#3D2B1F;font-size:11px;font-weight:900;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:2px;">④</div>
+          <div style="font-size:12px; line-height:1.75; color:#3D2B1F;">
+            <strong style="color:#C47A30">한쪽 이야기만 퍼뜨려 진실 가리기</strong><br>
+            어흥에 대한 나쁜 이야기만 골라서 퍼뜨리고, 할멈과 어흥의 따뜻한 이야기는 숨겼어요. 한 가지 정보만 보지 말고 다른 정보도 함께 찾아봐야 해요! (팩트체크 기준 ④)
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:flex-start; gap:10px; padding:8px 0;">
+          <div style="background:#FFB347;color:#3D2B1F;font-size:11px;font-weight:900;padding:2px 7px;border-radius:20px;flex-shrink:0;margin-top:2px;">⑤</div>
+          <div style="font-size:12px; line-height:1.75; color:#3D2B1F;">
+            <strong style="color:#C47A30">기자를 위협해 진실 취재 막기</strong><br>
+            진실을 알리려는 북실 기자를 협박해서 사실이 밝혀지지 않도록 했어요. 이건 다른 사람의 권리를 침해하는 나쁜 행동이에요.
+          </div>
+        </div>
+      </div>
+
+      <p style="font-style:italic; color:rgba(42,74,46,0.65); font-size:12px;">
+        💡 알밤은 살인을 저지르지는 않았지만, 거짓 정보를 만들고 퍼뜨려 어흥을 범인으로 몰았어요. 이렇게 가짜뉴스는 아무 잘못 없는 사람에게 큰 상처를 줄 수 있답니다. 정보를 볼 때는 언제나 팩트체크 5가지 기준을 기억하세요!
+      </p>
+    </div>
+
+    <div style="height:10px"></div>
+  </div>
+
+  <div class="nav-bar no-print">
+    <button class="btn-sub" onclick="goTo('s-stage3')">← 3단계</button>
+    <button class="btn-main" onclick="goTo('s-stage5')">5단계로 이동 →</button>
+  </div>
+</div>
+
+<!-- ===== STAGE 5 ===== -->
+<div class="screen" id="s-stage5">
+  <div class="stage-header" style="background:#F2A8A8;">
+    <div>
+      <div class="stage-tag" style="color:rgba(61,43,31,0.6)">STAGE 5</div>
+      <div class="stage-title" style="color:#3D2B1F">소감 발표</div>
+    </div>
+    <div class="stage-icon">🎤</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:100%"></div></div>
+    <div class="progress-label">5 / 5 단계 — 마지막!</div>
+  </div>
+
+  <div class="content-area">
+    <div class="step-banner fadeIn">
+      <span class="emoji">🎉</span>
+      <h2>소감을 나눠볼까요?</h2>
+      <p>오늘 게임을 통해 느낀 점을 자유롭게<br>적고 발표해 보세요!</p>
+    </div>
+
+    <div class="reflection-area fadeIn">
+      <h3>💭 나의 소감</h3>
+      <div class="fill-group">
+        <div class="fill-label">이름</div>
+        <input type="text" id="my-name" placeholder="이름을 입력하세요" maxlength="15">
+      </div>
+      <div class="fill-group">
+        <div class="fill-label">오늘 게임에서 새롭게 알게 된 점</div>
+        <textarea class="reftext" id="ref1" placeholder="팩트체크, 미디어 리터러시에 대해 새롭게 알게 된 점을 적어보세요..."></textarea>
+      </div>
+      <div class="fill-group">
+        <div class="fill-label">앞으로 정보를 접할 때 달라질 나의 행동</div>
+        <textarea class="reftext" id="ref2" placeholder="앞으로 뉴스나 SNS를 볼 때 어떻게 행동할지 적어보세요..."></textarea>
+      </div>
+    </div>
+
+    <!-- Discussion prompts -->
+    <div class="factcheck-card fadeIn">
+      <h3>🗣 발표 토론 주제</h3>
+      <div class="fc-item">
+        <div class="fc-num">Q</div>
+        <div class="fc-text">처음 단서 1~6번을 읽었을 때 누가 범인이라고 생각했나요? 왜 그렇게 생각했나요?</div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-num">Q</div>
+        <div class="fc-text">알밤 TV의 영상이 가짜뉴스라는 것을 어떤 단서에서 알 수 있었나요?</div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-num">Q</div>
+        <div class="fc-text">실생활에서 이런 가짜뉴스를 만난다면 어떻게 판별할 수 있을까요?</div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-num">Q</div>
+        <div class="fc-text">"진실은 보려고 하는 자에게만 보인다"는 말의 의미는 무엇일까요?</div>
+      </div>
+    </div>
+
+    <div style="background:var(--card-bg);border:3px solid var(--border);border-radius:14px;padding:18px;box-shadow:var(--shadow);text-align:center;margin-bottom:14px;" class="fadeIn">
+      <div style="font-size:40px;margin-bottom:8px;">🐯🎉</div>
+      <div style="font-family:'Nanum Gothic',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px;">팩트체크 탐정 완료!</div>
+      <div style="font-size:13px;color:#555;line-height:1.7;">오늘 어흥 회장의 비밀을 파헤쳐 주셔서 감사합니다.<br>앞으로도 정보를 비판적으로 바라보는<br>미디어 리터러시 탐정이 되어주세요! 🔍</div>
+    </div>
+
+    <div style="height:10px"></div>
+  </div>
+
+  <div class="nav-bar no-print">
+    <button class="btn-sub" onclick="goTo('s-stage4')">← 4단계</button>
+    <button class="btn-main" onclick="goTo('s-intro')">🏠 처음으로</button>
+  </div>
+</div>
+
+<!-- ===== PRINT AREA ===== -->
+<div id="print-area">
+  <div class="print-card-outer">
+    <div class="print-card-header">
+      ⭐ 어흥 회장의 비밀 — 추론 카드 ⭐
+    </div>
+    <div class="print-card-body">
+      <div class="print-stars">🐯 🔍 🐯</div>
+      <div class="print-title">팩트체크 탐정 추론 카드</div>
+      <div class="print-sub">본 사건을 팩트체크 가이드라인과 단서 카드를 종합적으로 분석하여 추론한 결과</div>
+
+      <div class="print-field">
+        <div class="print-field-label">📌 모둠 이름</div>
+        <div class="print-line" id="p-group"></div>
+      </div>
+
+      <div class="print-field">
+        <div class="print-field-label">🔎 우리 모둠이 추론한 범인</div>
+        <div class="print-line" id="p-culprit">범인은 ________________________________ 이다.</div>
+      </div>
+
+      <div class="print-field">
+        <div class="print-field-label">💬 범인이라고 생각하는 이유</div>
+        <div class="print-long-line" id="p-reason"></div>
+        <div class="print-long-line" style="min-height:40px"></div>
+      </div>
+
+      <div class="print-field">
+        <div class="print-field-label">🕵️ 단서 카드에서 발견한 허점</div>
+        <div class="print-long-line" id="p-weakness"></div>
+        <div class="print-long-line" style="min-height:40px"></div>
+      </div>
+
+      <div style="margin-top:20px;border-top:2px solid #000;padding-top:14px;">
+        <div style="font-size:11px;font-weight:900;letter-spacing:1px;margin-bottom:10px;color:#C47D0A">📋 팩트체크 가이드라인 5가지</div>
+        <div style="font-size:12px;line-height:2;">
+          ① 정보의 출처를 확인합시다!<br>
+          ② 정보의 작성자(기자 이름, 이메일 등)를 확인합시다!<br>
+          ③ 정보가 언제 만들어졌는지 확인합시다!<br>
+          ④ 다른 정보를 추가적으로 확인합시다!<br>
+          ⑤ 정보가 과도한 불안을 주는지 확인합시다!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== CARD TOGGLE =====
+function toggleCard(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.card-arrow');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+// ===== TIMER =====
+let timerInterval = null;
+let timerSeconds = 600;
+let timerRunning = false;
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60);
+  const s = timerSeconds % 60;
+  const display = document.getElementById('timer-display');
+  display.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  display.classList.toggle('warn', timerSeconds <= 60 && timerSeconds > 0);
+}
+
+function startTimer() {
+  if (timerRunning) return;
+  timerRunning = true;
+  timerInterval = setInterval(() => {
+    if (timerSeconds > 0) {
+      timerSeconds--;
+      updateTimerDisplay();
+    } else {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      document.getElementById('timer-display').textContent = '⏰ 시간 종료!';
+    }
+  }, 1000);
+}
+
+function pauseTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerSeconds = 600;
+  updateTimerDisplay();
+}
+
+// ===== TRUTH REVEAL =====
+function revealTruth() {
+  document.getElementById('truth-reveal-btn').style.display = 'none';
+  const card = document.getElementById('truth-card');
+  card.style.display = 'block';
+  card.style.animation = 'fadeIn 0.5s ease';
+  setTimeout(() => { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+}
+
+// ===== PRINT =====
+function printCard() {
+  const group = document.getElementById('group-name').value || '(모둠 이름 미입력)';
+  const culprit = document.getElementById('culprit').value || '';
+  const reason = document.getElementById('reason').value || '';
+  const weakness = document.getElementById('weakness').value || '';
+
+  document.getElementById('p-group').textContent = group;
+  document.getElementById('p-culprit').textContent = culprit ? `범인은 ${culprit} 이다.` : '범인은 ________________________________ 이다.';
+  document.getElementById('p-reason').textContent = reason;
+  document.getElementById('p-weakness').textContent = weakness;
+
+  // Hide screens for printing
+  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+  document.getElementById('print-area').style.display = 'block';
+
+  window.print();
+
+  setTimeout(() => {
+    document.getElementById('print-area').style.display = 'none';
+    document.getElementById('s-stage3').style.display = '';
+    document.getElementById('s-stage3').classList.add('active');
+  }, 1000);
+}
+
+// Fix print recovery
+window.onafterprint = function() {
+  document.getElementById('print-area').style.display = 'none';
+  document.querySelectorAll('.screen').forEach(s => s.style.display = '');
+  document.getElementById('s-stage3').classList.add('active');
+};
+</script>
+</body>
+</html>
